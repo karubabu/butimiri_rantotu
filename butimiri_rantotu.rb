@@ -3,15 +3,16 @@ Plugin.create(:butimiri_rantotu) do
 	on_appear do |ms|
 		ms.each do |m|
 			if m.message.to_me?()
-				if m.message.to_s =~ /ﾌﾞﾘ|ﾘｭﾘｭﾘｭ|ﾌﾞﾂ|ﾁﾁ|ﾐﾘ/ and m[:created] > DEFINED_TIME and !m.retweet? then
-					Service.primary.post(:message => "#{"@" + m.user.idname + ' ' + "(´･ω･｀)凸" + "！" * rand(50)}", :replyto => m)
-					m.message.favorite(true)
-				elsif m.message.to_s =~ /ｯ！/ and m[:created] > DEFINED_TIME and !m.retweet? then
+				if !m.message.from_me?()
+					if m.message.to_s =~ /ﾌﾞﾘ|ﾘｭﾘｭﾘｭ|ﾌﾞﾂ|ﾁﾁ|ﾐﾘ/ and m[:created] > DEFINED_TIME and !m.retweet? then
+						Service.primary.post(:message => "#{"@" + m.user.idname + ' ' + "(´･ω･｀)凸" + "！" * rand(50)}", :replyto => m)
+						m.message.favorite(true)
+					elsif m.message.to_s =~ /ｯ！/ and m[:created] > DEFINED_TIME and !m.retweet? then
 
-				elsif m.message.to_s =~ /([うおあｕｏａ]){3,}?|[!！]{10,}/ and m[:created] > DEFINED_TIME and !m.retweet? then
-					Service.primary.post(:message => "#{"@" + m.user.idname + ' ' + "(´･ω･｀)うるさい" + "！"+ "！" * rand(20)}", :replyto => m)
-					m.message.favorite(true)
-				else
+					elsif m.message.to_s =~ /([うおあｕｏａ]){3,}?|[!！]{10,}/ and m[:created] > DEFINED_TIME and !m.retweet? then
+						Service.primary.post(:message => "#{"@" + m.user.idname + ' ' + "(´･ω･｀)うるさい" + "！"+ "！" * rand(20)}", :replyto => m)
+						m.message.favorite(true)
+					end
 				end
 			end
 		end
