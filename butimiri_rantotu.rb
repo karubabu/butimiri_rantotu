@@ -4,7 +4,7 @@ Plugin.create(:butimiri_rantotu) do
 		ms.each do |m|
 			if m.message.to_me?()
 				if !m.message.from_me?()
-					if m.message.to_s =~ /ﾌﾞﾘ|ﾘｭﾘｭﾘｭ|ﾌﾞﾂ|ﾁﾁ|ﾐﾘ/ and m[:created] > DEFINED_TIME and !m.retweet? then
+					if m.message.to_s =~ /ﾌﾞﾘ|ﾘｭﾘｭﾘｭ|ﾌﾞﾂ|ﾁﾁ|ﾐﾘ|([ｂｕｔｉｍｒ]){4,}/ and m[:created] > DEFINED_TIME and !m.retweet? then
 						Service.primary.post(:message => "#{"@" + m.user.idname + ' ' + "(´･ω･｀)凸" + "！" * rand(50)}", :replyto => m)
 						m.message.favorite(true)
 					elsif m.message.to_s =~ /ｯ！/ and m[:created] > DEFINED_TIME and !m.retweet? then
