@@ -9,7 +9,7 @@ Plugin.create(:butimiri_rantotu) do
 						m.message.favorite(true)
 					elsif m.message.to_s =~ /ｯ！/ and m[:created] > DEFINED_TIME and !m.retweet? then
 
-					elsif m.message.to_s =~ /([うおあｕｏａio]){5,}?|[!！]{10,}/ and m[:created] > DEFINED_TIME and !m.retweet? then
+					elsif m.message.to_s =~ /([うおあｕｏａioUIOA]){5,}?|[!！]{10,}/ and m[:created] > DEFINED_TIME and !m.retweet? then
 						Service.primary.post(:message => "#{"@" + m.user.idname + ' ' + "(´･ω･｀)うるさい" + "！"+ "！" * rand(20)}", :replyto => m)
 						m.message.favorite(true)
 					end
