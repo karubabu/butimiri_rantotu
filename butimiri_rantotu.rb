@@ -1,4 +1,4 @@
-Plugin.create(:butimiri_rantotu) do
+﻿Plugin.create(:butimiri_rantotu) do
 	DEFINED_TIME = Time.new.freeze
 	on_appear do |ms|
 		ms.each do |m|
@@ -9,7 +9,7 @@ Plugin.create(:butimiri_rantotu) do
 						m.message.favorite(true)
 					elsif m.message.to_s =~ /ｯ！/ and m[:created] > DEFINED_TIME and !m.retweet? then
 
-					elsif m.message.to_s =~ /[アイウオ]{5,}?|[あいうお]{5,}?|[ｕｏａioUIOA]{5,}?|[!！]{10,}/ and m[:created] > DEFINED_TIME and !m.retweet? then
+					elsif m.message.to_s =~ /[アイウオ]{5,}?|[あいうお]{6,}?|[ｕｏａioUIOA]{5,}?|[!！]{10,}/ and m[:created] > DEFINED_TIME and !m.retweet? then
 						Service.primary.post(:message => "#{"@" + m.user.idname + ' ' + "(´･ω･｀)うるさい" + "！"+ "！" * rand(20)}", :replyto => m)
 						m.message.favorite(true)
 					end
